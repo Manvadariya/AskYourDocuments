@@ -65,6 +65,7 @@ Don't just manage your documents – **master them**. Unearth hidden intelligenc
    export AZURE_LLM_MODEL="openai/gpt-4o-mini"
    export AZURE_EMBEDDING_MODEL="openai/text-embedding-3-large"
    export HF_TOKEN="<your_huggingface_token>"
+   export HF_VISION_MODEL="meta-llama/Llama-3.2-11B-Vision-Instruct:together"
    export HF_VISION_MODEL="meta-llama/Llama-3.2-11B-Vision-Instruct"
    export NGROK_AUTHTOKEN="<optional_ngrok_token>"
    ```
