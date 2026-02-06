@@ -44,3 +44,30 @@
 Don't just manage your documents – **master them**. Unearth hidden intelligence, accelerate your workflows, and redefine your relationship with information. Join the vanguard of professionals who are leveraging the unparalleled power of conversational document analysis.
 
 **AskYourDocuments** – Where your documents transcend their static form and become your most insightful, articulate, and indispensable partners. **Dare to experience the difference.**
+
+## 🧪 Robust notebook environment setup (local Jupyter / VS Code)
+1. Create and activate a fresh virtual environment.
+2. Install Python dependencies:
+   ```bash
+   python -m pip install -r requirements.notebook.txt
+   ```
+3. Install optional OCR/system tools (Linux):
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y tesseract-ocr tesseract-ocr-eng poppler-utils libreoffice unoconv
+   ```
+4. Export runtime secrets before running the notebook:
+   ```bash
+   export GITHUB_MODELS_ENDPOINT="https://models.github.ai/inference"
+   export AZURE_INFERENCE_ENDPOINT="$GITHUB_MODELS_ENDPOINT"
+   export GITHUB_TOKEN="<your_github_models_token>"
+   export AZURE_EMBEDDING_API_KEY="$GITHUB_TOKEN"
+   export AZURE_LLM_MODEL="openai/gpt-4o-mini"
+   export AZURE_EMBEDDING_MODEL="openai/text-embedding-3-large"
+   export HF_TOKEN="<your_huggingface_token>"
+   export HF_VISION_MODEL="meta-llama/Llama-3.2-11B-Vision-Instruct"
+   export NGROK_AUTHTOKEN="<optional_ngrok_token>"
+   ```
+5. Open `AskYourDocuments.ipynb` and run all cells.
+
+> The notebook now reads environment variables directly and gracefully handles non-Colab environments.
