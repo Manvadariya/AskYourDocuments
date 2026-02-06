@@ -44,3 +44,50 @@
 Don't just manage your documents – **master them**. Unearth hidden intelligence, accelerate your workflows, and redefine your relationship with information. Join the vanguard of professionals who are leveraging the unparalleled power of conversational document analysis.
 
 **AskYourDocuments** – Where your documents transcend their static form and become your most insightful, articulate, and indispensable partners. **Dare to experience the difference.**
+## ✅ Robust local environment setup (recommended)
+
+If your notebook fails with dependency issues, use this tested workflow.
+
+> Notebook order is now: **1) API setup block first**, then installations, then frontend/backend cells.
+
+```bash
+bash scripts/run_notebook.sh
+```
+
+This script creates a virtual environment, installs pinned dependencies from `requirements.txt`, and executes the full notebook with `AUTO_START_FLASK=0` so validation can finish without hanging on the Flask server.
+
+### Environment variables
+Set these before running the notebook:
+
+- `GITHUB_TOKEN`: GitHub Models API token (used for both chat and embeddings).
+- `AZURE_LLM_MODEL_NAME` (optional): defaults to `openai/gpt-4o-mini`.
+- `HF_TOKEN`: Hugging Face token for vision/OCR model usage.
+- `HF_VISION_MODEL_ID` (optional): defaults to `meta-llama/Llama-3.2-11B-Vision-Instruct:together`.
+- `NGROK_AUTHTOKEN` (optional): for public tunnel.
+- `AUTO_START_FLASK` (optional): `1` to launch app automatically (default in notebook), `0` for CI/non-blocking execution.
+
+Example:
+
+```bash
+export GITHUB_TOKEN="<your_github_models_token>"
+export HF_TOKEN="<your_hf_token>"
+export NGROK_AUTHTOKEN="<your_ngrok_token>"
+export AZURE_LLM_MODEL_NAME="openai/gpt-4o-mini"
+bash scripts/run_notebook.sh
+```
+
+
+### If you see `403 Forbidden` during pip install
+This usually means your environment's proxy cannot reach package indexes.
+
+Try setting a reachable index mirror before running:
+
+```bash
+export PIP_INDEX_URL="https://pypi.org/simple"
+# optional
+export PIP_EXTRA_INDEX_URL="<your_secondary_index>"
+bash scripts/run_notebook.sh
+```
+
+The runner now attempts dependency installation in three modes automatically:
+1) current proxy env, 2) direct/no-proxy, 3) custom index (if `PIP_INDEX_URL` is set).
